@@ -1,4 +1,4 @@
-const CACHE_NAME = 'smors-cafe-v3';
+const CACHE_NAME = 'smors-cafe-v4';
 const ASSETS = [
   './',
   './index.html',
