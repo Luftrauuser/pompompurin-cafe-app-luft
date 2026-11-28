@@ -702,19 +702,18 @@
         <div class="flex justify-between"><span>Logros completados:</span><span id="stat-ach-count" class="text-[#4A2618]">0 / 46 🏆</span></div>
       </div>
 
-      <!-- Código de truco / Debug -->
+      <!-- Código secreto -->
       <div class="bg-[#F0FDFA] rounded-2xl p-3 border-2 border-[#B2F5EA] flex flex-col gap-1.5">
         <div class="font-display font-bold text-xs text-[#234E52] flex items-center justify-between">
-          <span>🐞 Código de truco (Debug)</span>
-          <span id="debug-status-label" class="text-[10px] font-extrabold text-[#2C7A7B]">Desactivado</span>
+          <span>🔑 Código secreto</span>
+          <span id="debug-status-label" class="text-[10px] font-extrabold text-[#2C7A7B]"></span>
         </div>
         <div class="flex gap-1.5">
-          <input id="input-cheat-code" type="text" maxlength="24" placeholder="Introduce código (ej. PURINDEBUG)..." class="flex-1 min-w-0 rounded-xl bg-white border border-[#81E6D9] px-2.5 py-1.5 text-[11px] font-mono text-[#234E52] focus:outline-none focus:border-[#319795]" />
+          <input id="input-cheat-code" type="text" maxlength="24" autocomplete="off" placeholder="Escribe un código..." class="flex-1 min-w-0 rounded-xl bg-white border border-[#81E6D9] px-2.5 py-1.5 text-[11px] font-mono text-[#234E52] focus:outline-none focus:border-[#319795]" />
           <button id="btn-apply-cheat" class="px-2.5 py-1.5 rounded-xl bg-[#2C7A7B] hover:bg-[#285E61] text-white font-display font-semibold text-[11px] shrink-0 transition">
-            Activar
+            Aplicar
           </button>
         </div>
-        <p class="text-[10px] font-bold text-[#2C7A7B]/80">Usa <span class="font-mono bg-white/80 px-1 rounded">PURINDEBUG</span> para pudines normales y dorados ilimitados (o <span class="font-mono bg-white/80 px-1 rounded">DEBUGOFF</span> para desactivar).</p>
       </div>
 
       <!-- Respaldo Manual Extra: Exportar / Importar Código Base64 -->
@@ -11137,11 +11136,11 @@
     function updateDebugStatusUI() {
       if (!elDebugStatusLabel) return;
       if (state.debugInfinite) {
-        elDebugStatusLabel.textContent = '✅ Modo Debug ACTIVO (🍮 y 🌟 ilimitados). Escribe DEBUGOFF para desactivar.';
-        elDebugStatusLabel.className = 'text-[10px] font-extrabold text-[#2B6E34] mt-1';
+        elDebugStatusLabel.textContent = 'Activo ✓';
+        elDebugStatusLabel.className = 'text-[10px] font-extrabold text-[#2B6E34]';
       } else {
-        elDebugStatusLabel.textContent = 'Código de prueba: PURINDEBUG (activar) • DEBUGOFF (desactivar)';
-        elDebugStatusLabel.className = 'text-[10px] font-bold text-[#8D5B3C] mt-1';
+        elDebugStatusLabel.textContent = '';
+        elDebugStatusLabel.className = 'text-[10px] font-extrabold text-[#2C7A7B]';
       }
     }
 
@@ -11153,14 +11152,14 @@
         state.puddings = Math.max(state.puddings, 999e9);
         state.goldenCurrency = Math.max(state.goldenCurrency, 999999);
         audio.playRankUp();
-        showToast('🧪', '¡Modo Debug Activado!', 'Tienes 🍮 y 🌟 ilimitados para probar todo.', true);
+        showToast('🧪', '¡Modo Debug Activado!', 'Tienes 🍮 y 🌟 ilimitados.', true);
       } else if (code === 'DEBUGOFF' || code === 'NORMALMODE') {
         state.debugInfinite = false;
         audio.playUiClick();
-        showToast('🧪', 'Modo Debug desactivado', 'Vuelves al modo de economía normal.');
+        showToast('🧪', 'Modo Debug desactivado', 'Vuelves al modo normal.');
       } else {
         audio.playMinigameMiss();
-        showToast('❓', 'Código no reconocido', 'Prueba con PURINDEBUG o DEBUGOFF.');
+        showToast('❓', 'Código no reconocido', 'Comprueba que esté bien escrito.');
         return;
       }
       elCheatInput.value = '';
